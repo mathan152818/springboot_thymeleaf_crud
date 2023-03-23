@@ -1,0 +1,88 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Easiest Way to Add Input Masks to Your Forms</title>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.error {
+	color: red
+}
+</style>
+
+</head>
+<body>
+	<div class="m-4">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<a href="http://localhost:2000/students" class="navbar-brand"><b>KEROLITES</b></a>
+				<button type="button" class="navbar-toggler"
+					data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse justify-content-between"
+					id="navbarCollapse">
+			</div>
+		</nav>
+	</div>
+
+	<div class="registration-form">
+		<form style="border-radius: 15px" th:action="@{/students}"
+			th:object="${addnew}" method="POST">
+			<div class="title">
+				<h3 class="text-center">Add Student Details</h3>
+			</div>
+			<br>
+			<div class="form-group">
+				<input type="text" class="form-control item" th:field="*{fullname}"
+					placeholder="Full Name" />
+				<p th:if="${#fields.hasErrors('fullname')}" th:errorclass="error"
+					th:errors="*{fullname}" />
+			</div>
+			
+			<div class="form-group">
+				<select th:field="*{gender}" class="form-control item">
+					<option value="">-- Select your Gender --</option>
+					<option th:each="gen: ${allGenders}" th:value="${gen}"
+						th:text="${gen}">
+				</select>
+				<p th:if="${#fields.hasErrors('gender')}" th:errorclass="error"
+					th:errors="*{gender}"></p>
+			</div>
+			
+			<div class="form-group">
+				<input type="text" class="form-control item" th:field="*{email}"
+					placeholder="Email ID" />
+				<p th:if="${#fields.hasErrors('email')}" th:errorclass="error"
+					th:errors="*{email}"></p>
+			</div>
+			
+			<div class="form-group">
+				<select th:field="*{department}" class="form-control item">
+					<option value="">-- Select your Department --</option>
+					<option th:each="dep: ${allDepartment}" th:value="${dep}"
+						th:text="${dep}">
+				</select>
+				<p th:if="${#fields.hasErrors('department')}" th:errorclass="error"
+					th:errors="*{department}"></p>
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-block create-account">Submit</button>
+			</div>
+			<div style="border-radius: 30px; background-color: #0d6efd;"
+				class="form-group">
+				<a href="http://localhost:2000/students"
+					class="btn btn-block create-account">Back</a>
+			</div>
+		</form>
+
+	</div>
+</body>
+</html>
